@@ -1,0 +1,11 @@
+MakeKSNP3infile 1genome input_list.txt A
+mkdir 2reference
+cp 1genome/reference_chromosome.fasta 2reference
+MakeKSNP3infile 2reference annotation-list.txt A
+genome_names3 annotation-list.txt 2reference/annotation-genome.txt
+mkdir 3kmer-results
+MakeFasta input_list.txt 3kmer-results/all.fasta
+cd 3kmer-results
+Kchooser all.fasta
+cd ..
+yes y | kSNP3 -in input_list.txt -outdir 4SNP_results -k 21 -annotate 2reference/annotation-genome.txt -NJ -vcf
